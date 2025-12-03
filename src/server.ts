@@ -50,6 +50,8 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Full Stack Developer!");
 });
 
+
+//users crud
 app.post("/users", async(req, res) => {
   const {name,email} = req.body
 
@@ -73,6 +75,18 @@ app.post("/users", async(req, res) => {
     })
   }
 });
+
+
+app.get("/users",async(req:Request,res:Response) => {
+  try{
+
+  }catch(error:any){
+    res.status(500).json({
+      success:false,
+      message:error.message
+    })
+  }
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
