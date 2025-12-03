@@ -150,7 +150,7 @@ app.put("/users/:id",async(req:Request,res:Response) => {
 app.delete("/users/:id" , async(req:Request,res:Response) => {
   
   try{
-    const result = await pool.query(`SELECT * DELETE FROM users WHERE id = $1`,[req.params.id])
+    const result = await pool.query(`DELETE FROM users WHERE id = $1`,[req.params.id])
 
     if(result.rows.length === 0){
        res.status(404).json({
