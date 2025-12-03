@@ -50,12 +50,21 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Full Stack Developer!");
 });
 
-app.post("/users", (req, res) => {
-  const {email,password} = req.body
+app.post("/users", async(req, res) => {
+  const {name,email} = req.body
 
   try{
 
-    
+    const result = await pool.query(
+      `INSERT INTO users(name,email) VALUES($1, $2) RETURNING *`,[name,email]
+    )
+
+    res.status(200).send({
+      success : true,
+      message : "Data Inserted Successfully",
+      data : result.rows[0]
+
+    })
 
   }catch(err:any){
     res.status(500).json({
