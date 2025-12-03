@@ -76,7 +76,6 @@ app.post("/users", async(req, res) => {
   }
 });
 
-
 app.get("/users",async(req:Request,res:Response) => {
   try{
     const result = await pool.query(`SELECT * FROM users`);
@@ -120,6 +119,28 @@ app.get("/users/:id" , async(req:Request,res:Response) => {
     })
   }
 
+})
+
+
+app.put("/users/:id",async(req:Request,res:Response) => {
+  const {name,email} = req.body
+  try{
+    const result = await pool.query(`UPDATE users SET name=$1, email=$2 WHERE id=$3 RETURNING *`,
+      [name,email,req.params.id]
+    );
+
+    res.status(200).json({
+      success:true,
+      message:"successfully retrieved",
+      data : result.rows
+    })
+
+  }catch(error:any){
+    res.status(500).json({
+      success:false,
+      message:error.message
+    })
+  }
 })
 
 app.listen(port, () => {
