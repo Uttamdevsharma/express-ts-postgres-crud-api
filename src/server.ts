@@ -79,6 +79,13 @@ app.post("/users", async(req, res) => {
 
 app.get("/users",async(req:Request,res:Response) => {
   try{
+    const result = await pool.query(`SELECT * FROM users`);
+
+    res.status(200).json({
+      success:true,
+      message:"successfully retrieved",
+      data : result.rows
+    })
 
   }catch(error:any){
     res.status(500).json({
