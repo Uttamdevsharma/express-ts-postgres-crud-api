@@ -50,14 +50,19 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Full Stack Developer!");
 });
 
-app.post("/", (req, res) => {
-  const result = req.body;
-  console.log(result);
+app.post("/users", (req, res) => {
+  const {email,password} = req.body
 
-  res.send({
-    message: "successfully",
-    result,
-  });
+  try{
+
+    
+
+  }catch(err:any){
+    res.status(500).json({
+      success:false,
+      message : err.message
+    })
+  }
 });
 
 app.listen(port, () => {
