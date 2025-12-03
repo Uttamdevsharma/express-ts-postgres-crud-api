@@ -177,7 +177,9 @@ app.delete("/users/:id" , async(req:Request,res:Response) => {
 
 
 
+
 //todos crud
+//post a todos
 app.post("/todos", async(req, res) => {
   const {user_id,title} = req.body
 
@@ -201,6 +203,39 @@ app.post("/todos", async(req, res) => {
     })
   }
 });
+
+//get a todos
+app.get("/todos",async(req:Request,res:Response) => {
+  try{
+    const result = await pool.query(`SELECT * FROM todos`);
+
+    res.status(200).json({
+      success:true,
+      message:"successfully retrieved",
+      data : result.rows
+    })
+
+  }catch(error:any){
+    res.status(500).json({
+      success:false,
+      message:error.message
+    })
+  }
+})
+
+
+
+
+app.use((req,res) => {
+  res.status(404).json({
+    success : false,
+    message : "Route not Found",
+    path: req.path
+  })
+})
+
+
+
 
 
 app.listen(port, () => {
