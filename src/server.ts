@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import { Pool } from "pg";
 const app = express();
 const port = 5000;
@@ -42,11 +42,16 @@ const initDB = async () => {
 
 initDB();
 
+const logger = (req:Request,res:Response,next:NextFunction) => {
+  console.log(`${req.path} ${req.method}`)
+  next()
+}
+
 //middleware
 app.use(express.json());
 // app.use(express.urlencoded()) //for FORM DATA
 
-app.get("/", (req: Request, res: Response) => {
+app.get("/",logger, (req: Request, res: Response) => {
   res.send("Full Stack Developer!");
 });
 
