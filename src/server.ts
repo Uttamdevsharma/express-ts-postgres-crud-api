@@ -152,7 +152,8 @@ app.delete("/users/:id" , async(req:Request,res:Response) => {
   try{
     const result = await pool.query(`DELETE FROM users WHERE id = $1`,[req.params.id])
 
-    if(result.rows.length === 0){
+    if(result.rowCount === 0){
+      console.log(result.rowCount)
        res.status(404).json({
         success:false,
         message : "User not Found"
@@ -160,8 +161,8 @@ app.delete("/users/:id" , async(req:Request,res:Response) => {
     }else {
       res.status(200).json({
         success:true,
-        message : "User fetched successfully",
-        data : null
+        message : "User Deleted Succesfully",
+        data : result.rows
       })
     }
   }catch(err:any){
