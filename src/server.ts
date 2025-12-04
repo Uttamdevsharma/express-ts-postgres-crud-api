@@ -9,10 +9,6 @@ const port = config.port;
 //initializing db
 initDB();
 
-const logger = (req:Request,res:Response,next:NextFunction) => {
-  console.log(`${req.path} ${req.method}`)
-  next()
-}
 
 //middleware
 app.use(express.json());
