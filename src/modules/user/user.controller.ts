@@ -3,24 +3,43 @@ import { pool } from "../../config/db";
 import { userService } from "./user.service";
 
 //post a user
+// const createUser = async (req: Request, res: Response) => {
+//   const { name, email } = req.body;
+
+//   try {
+//     const result = await userService.createUser(name, email);
+
+//     res.status(200).send({
+//       success: true,
+//       message: "Data Inserted Successfully",
+//       data: result.rows[0],
+//     });
+//   } catch (err: any) {
+//     res.status(500).json({
+//       success: false,
+//       message: err.message,
+//     });
+//   }
+// };
+
+//optional post
 const createUser = async (req: Request, res: Response) => {
-  const { name, email } = req.body;
-
-  try {
-    const result = await userService.createUser(name, email);
-
-    res.status(200).send({
-      success: true,
-      message: "Data Inserted Successfully",
-      data: result.rows[0],
-    });
-  } catch (err: any) {
-    res.status(500).json({
-      success: false,
-      message: err.message,
-    });
-  }
-};
+  
+    try {
+      const result = await userService.createUser(req.body);
+  
+      res.status(200).send({
+        success: true,
+        message: "Data Inserted Successfully",
+        data: result.rows[0],
+      });
+    } catch (err: any) {
+      res.status(500).json({
+        success: false,
+        message: err.message,
+      });
+    }
+  };
 
 //get all user
 const getAllUser = async (req: Request, res: Response) => {
