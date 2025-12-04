@@ -1,5 +1,6 @@
 import config from ".";
 import { Pool } from "pg";
+
 export const pool = new Pool({
   connectionString: `${config.connection_str}`,
 });
@@ -9,6 +10,7 @@ export const pool = new Pool({
     CREATE TABLE IF NOT EXISTS users(
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
+    role VARCHAR(50) NOT NULL,
     email VARCHAR(150) UNIQUE NOT NULL,
     password TEXT NOT NULL,
     age INT,

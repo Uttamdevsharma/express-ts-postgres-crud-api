@@ -3,6 +3,7 @@ import express, { NextFunction, Request, Response } from "express";
 import initDB, { pool } from "./config/db";
 import logger from "./middleware/logger";
 import { userRoutes } from "./modules/user/user.routes";
+import { authRoutes } from "./modules/auth/auth.routes";
 
 const app = express();
 const port = config.port;
@@ -23,6 +24,9 @@ app.get("/",logger, (req: Request, res: Response) => {
 
 // user router
 app.use("/users", userRoutes);
+
+//auth router
+app.use("/auth" , authRoutes)
 
 
 //todos crud
