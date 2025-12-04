@@ -23,11 +23,10 @@ app.get("/",logger, (req: Request, res: Response) => {
 
 //users crud
 
-// post user
+// user router
 app.use("/users", userRoutes);
 
-//all user get
-app.get("/users",)
+
 
 //single user get
 app.get("/users/:id" , async(req:Request,res:Response) => {
