@@ -12,10 +12,10 @@ const router = express.Router()
 router.post("/",userController.createUser)
 
 //get all user
-router.get("/",auth("admin"),userController.getAllUser)
+router.get("/",auth("user","admin"),userController.getAllUser)
 
 //single user get
-router.get("/:id" ,userController.getSingleUser )
+router.get("/:id",auth("user") ,userController.getSingleUser )
 
 //update a user
 router.put("/:id", userController.updateUser)
