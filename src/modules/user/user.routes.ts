@@ -1,33 +1,14 @@
 
 import express, { Request, Response } from 'express'
 import { pool } from '../../config/db'
+import { userController } from './user.controller'
 
 const router = express.Router()
 
+//modular ->  routes -> controllers - > service (business logic)
+
 //post a user
-router.post("/",async(req, res) => {
-  const {name,email} = req.body
-
-  try{
-
-    const result = await pool.query(
-      `INSERT INTO users(name,email) VALUES($1, $2) RETURNING *`,[name,email]
-    )
-
-    res.status(200).send({
-      success : true,
-      message : "Data Inserted Successfully",
-      data : result.rows[0]
-
-    })
-
-  }catch(err:any){
-    res.status(500).json({
-      success:false,
-      message : err.message
-    })
-  }
-})
+router.post("/",userController.createUser)
 
 //get all user
 router.get("/",async(req:Request,res:Response) => {
