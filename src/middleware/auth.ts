@@ -16,7 +16,6 @@ const auth = (...roles: string[]) => {
             req.user = decoded
 
             //["admin" "user"]
-
             if(roles.length && !roles.includes(decoded.role as string)){
                 return res.status(500).json({
                     error : "unauthorized"
